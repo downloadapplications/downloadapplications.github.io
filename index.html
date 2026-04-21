@@ -1,25 +1,49 @@
-<div id="apps"></div>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Download Applications</title>
 
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<script>
-fetch('apps.json')
-  .then(res => res.json())
-  .then(apps => {
-    const container = document.getElementById('apps');
+<body>
 
-    apps.forEach(app => {
-      const card = document.createElement('div');
-      card.className = 'app';
+  <h1>Download Applications</h1>
 
-      card.innerHTML = `
-        <h3>${app.name}</h3>
-        <p>${app.dev} • ${app.category}</p>
-        <p>${app.description}</p>
-        <a href="${app.link}" target="_blank">Official Download</a>
-      `;
+  <div id="apps">Loading apps...</div>
 
-      container.appendChild(card);
-    });
-  });
-</script>
+  <script>
+    fetch('./apps.json')
+      .then(res => {
+        if (!res.ok) throw new Error("apps.json not found (check filename/path)");
+        return res.json();
+      })
+      .then(apps => {
+        const container = document.getElementById('apps');
+        container.innerHTML = "";
+
+        apps.forEach(app => {
+          const card = document.createElement('div');
+          card.className = 'app';
+
+          card.innerHTML = `
+            <h3>${app.name}</h3>
+            <p>${app.dev} • ${app.category}</p>
+            <p>${app.description}</p>
+            <a href="${app.link}" target="_blank">Official Download</a>
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.getElementById('apps').innerHTML =
+          "<p style='color:red'>Failed to load apps.json</p>";
+
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>
