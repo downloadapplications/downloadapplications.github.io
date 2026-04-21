@@ -1,0 +1,23 @@
+<div id="apps"></div>
+
+<script>
+fetch('apps.json')
+  .then(res => res.json())
+  .then(apps => {
+    const container = document.getElementById('apps');
+
+    apps.forEach(app => {
+      const card = document.createElement('div');
+      card.className = 'app';
+
+      card.innerHTML = `
+        <h3>${app.name}</h3>
+        <p>${app.dev} • ${app.category}</p>
+        <p>${app.description}</p>
+        <a href="${app.link}" target="_blank">Official Download</a>
+      `;
+
+      container.appendChild(card);
+    });
+  });
+</script>
