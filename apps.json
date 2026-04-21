@@ -14,6 +14,34 @@
     "description": "App to write, plan, collaborate and get organised"
   },
   {
+    "name": "Joplin (Windows)",
+    "dev": "Laurent Cozic",
+    "category": "Notetaking",
+    "link": "https://github.com/laurent22/joplin/releases/download/v3.5.13/Joplin-Setup-3.5.13.exe",
+    "description": "Notetaking App"
+  },
+  {
+    "name": "Joplin (macOS)",
+    "dev": "Laurent Cozic",
+    "category": "Notetaking",
+    "link": "https://github.com/laurent22/joplin/releases/download/v3.5.13/Joplin-3.5.13-arm64.DMG",
+    "description": "Notetaking App"
+  },
+  {
+    "name": "Obsidian (Windows)",
+    "dev": "Dynalist Inc",
+    "category": "Notetaking",
+    "link": "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.7/Obsidian-1.12.7.exe",
+    "description": "Notetaking App"
+  },
+  {
+    "name": "Obsidian (macOS)",
+    "dev": "Dynalist Inc",
+    "category": "Notetaking",
+    "link": "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.7/Obsidian-1.12.7.dmg",
+    "description": "Notetaking App"
+  },
+  {
     "name": "Google Chrome (macOS)",
     "dev": "Google",
     "category": "Browser",
@@ -56,10 +84,10 @@
     "description": "Web browser focusing on privacy"
   },
   {
-    "name": "Microsoft Edge (macOS)",
-    "dev": "Microsoft",
+    "name": "Microslop Edge (macOS)",
+    "dev": "Microslop",
     "category": "Browser",
-    "link": "https://go.microsoft.com/fwlink/?linkid=2069148",
+    "link": "https://go.microslop.com/fwlink/?linkid=2069148",
     "description": "Multi-platform web browser"
   },
   {
@@ -145,5 +173,47 @@
     "category": "Communication",
     "link": "https://download.viber.com/desktop/mac/online/Viber.dmg",
     "description": "Calling and messaging application focused of security"
+  },
+  {
+    "name": "Rectangle (macOS)",
+    "dev": "Rxhason",
+    "category": "Utilities",
+    "link": "https://github.com/rxhanson/Rectangle/releases/latest/download/Rectangle.pkg",
+    "description": "Window snapping tool for macOS"
+  }
+  {
+    "name": "AltTab (macOS)",
+    "dev": "Lwouis",
+    "category": "Utilities",
+    "link": "https://github.com/lwouis/alt-tab-macos/releases/latest/download/AltTab.app.dSYM.zip",
+    "description": "Windows-like Alt-Tab on macOS"
+  },
+  {
+    "name": "Maccy (macOS)",
+    "dev": "p0deje",
+    "category": "Utilities",
+    "link": "https://github.com/p0deje/Maccy/releases/latest/download/Maccy.app.zip",
+    "description": "Lightweight clipboard manager"
+  },
+  {
+    "name": "Amythest (macOS)",
+    "dev": "ianyh",
+    "category": "Utilities",
+    "link": "https://github.com/ianyh/Amethyst/releases/latest/download/Amethyst.zip",
+    "description": "Automatic tiling window manager"
+  },
+    {
+    "name": "OnlyOffice (Windows)",
+    "dev": "Ascensio System SIA",
+    "category": "Office",
+    "link": "https://github.com/ONLYOFFICE/desktop-onlineinstaller/releases/latest/download/ONLYOFFICEDesktopInstaller.exe",
+    "description": "Document Editor"
+  },
+  {
+    "name": "OnlyOffice (macOS)",
+    "dev": "Ascensio System SIA",
+    "category": "Office",
+    "link": "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/ONLYOFFICE-arm.dmg",
+    "description": "Document Editor"
   }
 ]
