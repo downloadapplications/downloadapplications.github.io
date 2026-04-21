@@ -89,5 +89,61 @@
     "category": "Browser",
     "link": "https://net.geo.opera.com/opera_gx/stable/mac",
     "description": "Alternate version of the Opera web browser to compliment gaming"
+  },
+  {
+    "name": "Discord (macOS)",
+    "dev": "Discord Inc.",
+    "category": "Communication",
+    "link": "https://discord.com/api/download?platform=osx",
+    "description": "Voice and text voice software"
+  },
+  {
+    "name": "Discord (Windows)",
+    "dev": "Discord Inc.",
+    "category": "Communication",
+    "link": "https://discord.com/api/download?platform=win",
+    "description": "Voice and text voice software"
+  },
+  {
+    "name": "Zoom (Windows)",
+    "dev": "Zoom Communications",
+    "category": "Communication",
+    "link": "https://zoom.us/client/latest/ZoomInstallerFull.exe",
+    "description": "Voice and text voice software"
+  },
+  {
+    "name": "Zoom (macOS)",
+    "dev": "Zoom Communications",
+    "category": "Communication",
+    "link": "https://zoom.us/client/latest/Zoom.pkg",
+    "description": "Voice and text voice software"
+  },
+  {
+    "name": "Telegram (macOS)",
+    "dev": "Telegram Group",
+    "category": "Communication",
+    "link": "https://telegram.org/dl/desktop/mac",
+    "description": "Desktop client for telegram messanger"
+  },
+  {
+    "name": "Telegram (Windows)",
+    "dev": "Telegram Group",
+    "category": "Communication",
+    "link": "https://telegram.org/dl/desktop/win64",
+    "description": "Desktop client for telegram messanger"
+  },
+  {
+    "name": "Viber (Windows)",
+    "dev": "Rakuten Viber",
+    "category": "Communication",
+    "link": "https://download.cdn.viber.com/desktop/windows/ViberSetup.exe",
+    "description": "Desktop client for telegram messanger"
+  },
+  {
+    "name": "Viber (macOS)",
+    "dev": "Rakuten Viber",
+    "category": "Communication",
+    "link": "https://download.viber.com/desktop/mac/online/Viber.dmg",
+    "description": "Calling and messaging application focused of security"
   }
 ]
