@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Notion (Windows)",
+    "dev": "Notion Labs Inc",
+    "category": "Notetaking",
+    "link": "https://www.notion.com/desktop/windows/download",
+    "description": "App to write, plan, collaborate and get organised"
+  }
+]
+
+
+[
+  {
+    "name": "Notion (macOS)",
+    "dev": "Notion Labs Inc",
+    "category": "Notetaking",
+    "link": "https://www.notion.com/desktop/mac/download",
+    "description": "App to write, plan, collaborate and get organised"
+  }
+]
