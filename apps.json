@@ -180,7 +180,7 @@
     "category": "Utilities",
     "link": "https://github.com/rxhanson/Rectangle/releases/latest/download/Rectangle.pkg",
     "description": "Window snapping tool for macOS"
-  }
+  },
   {
     "name": "AltTab (macOS)",
     "dev": "Lwouis",
