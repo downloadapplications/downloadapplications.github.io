@@ -109,14 +109,14 @@
     "dev": "Zoom Communications",
     "category": "Communication",
     "link": "https://zoom.us/client/latest/ZoomInstallerFull.exe",
-    "description": "Voice and text voice software"
+    "description": "Video communication and virtual meeting platform"
   },
   {
     "name": "Zoom (macOS)",
     "dev": "Zoom Communications",
     "category": "Communication",
     "link": "https://zoom.us/client/latest/Zoom.pkg",
-    "description": "Voice and text voice software"
+    "description": "Video communication and virtual meeting platform"
   },
   {
     "name": "Telegram (macOS)",
@@ -137,7 +137,7 @@
     "dev": "Rakuten Viber",
     "category": "Communication",
     "link": "https://download.cdn.viber.com/desktop/windows/ViberSetup.exe",
-    "description": "Desktop client for telegram messanger"
+    "description": "Calling and messaging application focused of security"
   },
   {
     "name": "Viber (macOS)",
