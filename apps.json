@@ -175,6 +175,20 @@
     "description": "Calling and messaging application focused of security"
   },
   {
+    "name": "balenaEtcher (macOS)",
+    "dev": "Balena",
+    "category": "Utilities",
+    "link": "https://github.com/balena-io/etcher/releases/download/v2.1.4/balenaEtcher-2.1.4-arm64.dmg",
+    "description": "Flash ISOs to drives"
+  },
+  {
+    "name": "balenaEtcher (Windows)",
+    "dev": "Balena",
+    "category": "Utilities",
+    "link": "https://github.com/balena-io/etcher/releases/download/v2.1.4/balenaEtcher-2.1.4.Setup.exe",
+    "description": "Flash ISOs to drives"
+  },
+  {
     "name": "Rectangle (macOS)",
     "dev": "Rxhason",
     "category": "Utilities",
@@ -215,5 +229,19 @@
     "category": "Office",
     "link": "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/ONLYOFFICE-arm.dmg",
     "description": "Document Editor"
+  },
+  {
+    "name": "Dropbox (macOS)",
+    "dev": "Dropbox Inc",
+    "category": "Office",
+    "link": "https://www.dropbox.com/download?plat=mac"
+    "description": "Client for Dropbox"
+  },
+  {
+    "name": "Dropbox (Windows)",
+    "dev": "Dropbox Inc",
+    "category": "Office",
+    "link": "https://www.dropbox.com/download?plat=win"
+    "description": "Client for Dropbox"
   }
 ]
