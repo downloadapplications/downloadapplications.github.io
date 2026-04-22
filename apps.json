@@ -109,14 +109,14 @@
     "dev": "Opera Software",
     "category": "Browser",
     "link": "https://net.geo.opera.com/opera_gx/stable/windows",
-    "description": "Alternate version of the Opera web browser to compliment gaming"
+    "description": "Alternate version of the Opera web browser to complement gaming"
   },
   {
     "name": "Opera GX (macOS)",
     "dev": "Opera Software",
     "category": "Browser",
     "link": "https://net.geo.opera.com/opera_gx/stable/mac",
-    "description": "Alternate version of the Opera web browser to compliment gaming"
+    "description": "Alternate version of the Opera web browser to complement gaming"
   },
   {
     "name": "Discord (macOS)",
@@ -151,28 +151,28 @@
     "dev": "Telegram Group",
     "category": "Communication",
     "link": "https://telegram.org/dl/desktop/mac",
-    "description": "Desktop client for telegram messanger"
+    "description": "Desktop client for telegram messenger"
   },
   {
     "name": "Telegram (Windows)",
     "dev": "Telegram Group",
     "category": "Communication",
     "link": "https://telegram.org/dl/desktop/win64",
-    "description": "Desktop client for telegram messanger"
+    "description": "Desktop client for telegram messenger"
   },
   {
     "name": "Viber (Windows)",
     "dev": "Rakuten Viber",
     "category": "Communication",
     "link": "https://download.cdn.viber.com/desktop/windows/ViberSetup.exe",
-    "description": "Calling and messaging application focused of security"
+    "description": "Calling and messaging application focused on security"
   },
   {
     "name": "Viber (macOS)",
     "dev": "Rakuten Viber",
     "category": "Communication",
     "link": "https://download.viber.com/desktop/mac/online/Viber.dmg",
-    "description": "Calling and messaging application focused of security"
+    "description": "Calling and messaging application focused on security"
   },
   {
     "name": "balenaEtcher (macOS)",
@@ -210,7 +210,7 @@
     "description": "Lightweight clipboard manager"
   },
   {
-    "name": "Amythest (macOS)",
+    "name": "Amethyst (macOS)",
     "dev": "ianyh",
     "category": "Utilities",
     "link": "https://github.com/ianyh/Amethyst/releases/latest/download/Amethyst.zip",
@@ -234,14 +234,14 @@
     "name": "Dropbox (macOS)",
     "dev": "Dropbox Inc",
     "category": "Office",
-    "link": "https://www.dropbox.com/download?plat=mac"
+    "link": "https://www.dropbox.com/download?plat=mac",
     "description": "Client for Dropbox"
   },
   {
     "name": "Dropbox (Windows)",
     "dev": "Dropbox Inc",
     "category": "Office",
-    "link": "https://www.dropbox.com/download?plat=win"
+    "link": "https://www.dropbox.com/download?plat=win",
     "description": "Client for Dropbox"
   }
 ]
