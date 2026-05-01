@@ -1,56 +1,140 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Download Apps</title>
-  </head>
-  <body>
-    <h1>Apps</h1>
-    <input id="search" placeholder="Search apps..." />
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homebrew App Directory</title>
 
-    <ul id="list"></ul>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fafafa;
+      color: #111;
+    }
 
-    <script>
-      let casks = [];
+    header {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
 
-      async function loadCasks() {
-        const res = await fetch("https://formulae.brew.sh/api/cask.json");
-        casks = await res.json();
-        render(casks);
-      }
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+    }
 
-      function render(data) {
-        const list = document.getElementById("list");
-        list.innerHTML = "";
+    #list {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 10px;
+    }
 
-        data.slice(0, 200).forEach(app => {
-          const li = document.createElement("li");
+    .item {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      align-items: center;
+    }
 
-          const name = app.name?.[0] || app.token;
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #f0f0f0;
+    }
 
-          li.innerHTML = `
-            <strong>${name}</strong><br>
-            ${app.desc || "No description"}<br>
-            <small>${app.token}</small>
-          `;
+    .name {
+      font-weight: 600;
+      font-size: 14px;
+    }
 
-          list.appendChild(li);
-        });
-      }
+    .desc {
+      font-size: 12px;
+      color: #666;
+      margin-top: 2px;
+    }
 
-      document.getElementById("search").addEventListener("input", e => {
-        const q = e.target.value.toLowerCase();
+    .cmd {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
 
-        const filtered = casks.filter(app =>
-          (app.name?.[0] || "").toLowerCase().includes(q) ||
-          app.token.toLowerCase().includes(q) ||
-          (app.desc || "").toLowerCase().includes(q)
-        );
+<body>
 
-        render(filtered);
-      });
+<header>
+  <input id="search" placeholder="Search Homebrew apps..." />
+</header>
 
-      loadCasks();
-    </script>
-  </body>
+<div id="list"></div>
+
+<script>
+let casks = [];
+
+async function load() {
+  const res = await fetch("https://formulae.brew.sh/api/cask.json");
+  casks = await res.json();
+  render(casks);
+}
+
+function getIcon(app) {
+  const token = app.token;
+
+  // fallback icon (always works)
+  return `https://api.dicebear.com/7.x/shapes/png?seed=${token}`;
+}
+
+function render(data) {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  data.slice(0, 300).forEach(app => {
+    const name = app.name?.[0] || app.token;
+
+    const div = document.createElement("div");
+    div.className = "item";
+
+    div.innerHTML = `
+      <img class="icon"
+           src="${getIcon(app)}"
+           onerror="this.src='https://api.dicebear.com/7.x/shapes/png?seed=${app.token}'" />
+
+      <div style="flex:1">
+        <div class="name">${name}</div>
+        <div class="desc">${app.desc || "No description"}</div>
+        <div class="cmd">brew install --cask ${app.token}</div>
+      </div>
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+document.getElementById("search").addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+
+  const filtered = casks.filter(app =>
+    (app.name?.[0] || "").toLowerCase().includes(q) ||
+    app.token.toLowerCase().includes(q) ||
+    (app.desc || "").toLowerCase().includes(q)
+  );
+
+  render(filtered);
+});
+
+load();
+</script>
+
+</body>
 </html>
