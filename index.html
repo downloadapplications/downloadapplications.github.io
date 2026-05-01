@@ -1,87 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Download Applications</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Download Apps</title>
+  </head>
+  <body>
+    <h1>Apps</h1>
+    <input id="search" placeholder="Search apps..." />
 
-  <link rel="stylesheet" href="style.css">
-</head>
+    <ul id="list"></ul>
 
-<body>
+    <script>
+      let casks = [];
 
-  <!-- HEADER (needed for your CSS styling) -->
-  <header>
-    <h1>Download Applications</h1>
-
-    <!-- optional search (your CSS already supports it) -->
-    <input type="text" id="search" placeholder="Search apps...">
-  </header>
-
-  <!-- GRID CONTAINER -->
-  <div id="apps" class="grid">Loading apps...</div>
-
-  <!-- EMPTY STATE -->
-  <div id="empty">No apps found</div>
-
-  <script>
-    const container = document.getElementById('apps');
-    const emptyState = document.getElementById('empty');
-
-    let allApps = [];
-
-    function renderApps(apps) {
-      container.innerHTML = "";
-
-      if (!apps.length) {
-        emptyState.classList.add("show");
-        return;
-      } else {
-        emptyState.classList.remove("show");
+      async function loadCasks() {
+        const res = await fetch("https://formulae.brew.sh/api/cask.json");
+        casks = await res.json();
+        render(casks);
       }
 
-      apps.forEach(app => {
-        const card = document.createElement('div');
-        card.className = 'card';
+      function render(data) {
+        const list = document.getElementById("list");
+        list.innerHTML = "";
 
-        card.innerHTML = `
-          <h2>${app.name}</h2>
-          <p>${app.dev} • ${app.category}</p>
-          <p>${app.description}</p>
-          <a class="btn" href="${app.link}" target="_blank">Official Download</a>
-        `;
+        data.slice(0, 200).forEach(app => {
+          const li = document.createElement("li");
 
-        container.appendChild(card);
+          const name = app.name?.[0] || app.token;
+
+          li.innerHTML = `
+            <strong>${name}</strong><br>
+            ${app.desc || "No description"}<br>
+            <small>${app.token}</small>
+          `;
+
+          list.appendChild(li);
+        });
+      }
+
+      document.getElementById("search").addEventListener("input", e => {
+        const q = e.target.value.toLowerCase();
+
+        const filtered = casks.filter(app =>
+          (app.name?.[0] || "").toLowerCase().includes(q) ||
+          app.token.toLowerCase().includes(q) ||
+          (app.desc || "").toLowerCase().includes(q)
+        );
+
+        render(filtered);
       });
-    }
 
-    fetch('./apps.json')
-      .then(res => {
-        if (!res.ok) throw new Error("apps.json not found (check filename/path)");
-        return res.json();
-      })
-      .then(apps => {
-        allApps = apps;
-        renderApps(allApps);
-      })
-      .catch(err => {
-        container.innerHTML =
-          "<p style='color:red'>Failed to load apps.json</p>";
-        console.error(err);
-      });
-
-    // SEARCH FUNCTIONALITY (works with your CSS input styling)
-    document.getElementById("search").addEventListener("input", e => {
-      const q = e.target.value.toLowerCase();
-
-      const filtered = allApps.filter(app =>
-        app.name.toLowerCase().includes(q) ||
-        app.dev.toLowerCase().includes(q) ||
-        app.category.toLowerCase().includes(q)
-      );
-
-      renderApps(filtered);
-    });
-  </script>
-
-</body>
+      loadCasks();
+    </script>
+  </body>
 </html>
