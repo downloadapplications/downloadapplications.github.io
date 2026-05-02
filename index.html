@@ -6,132 +6,133 @@
   <title>App Store</title>
 
   <style>
-   body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-      background:#f5f5f7;
-      color:#1d1d1f;
-      display:flex;
-      justify-content:center;
-    }
+  /* BASE */
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#f5f5f7;
+  color:#1d1d1f;
+}
 
-    /* APP CONTAINER */
-    .app{
-      width:100%;
-      max-width:1100px;
-    }
+/* HEADER (FIXES YOUR TINY SEARCH) */
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(245,245,247,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e5e5;
+  display:flex;
+  justify-content:center;
+  padding:16px 20px;
+}
 
-    /* SIDEBAR */
-    .layout{
-      display:flex;
-      min-height:100vh;
-    }
+#search{
+  width:100%;
+  max-width:900px;              /* BIG desktop search */
+  padding:16px 20px;
+  font-size:16px;
+  border-radius:14px;
+  border:1px solid #ddd;
+  background:#fff;
+  outline:none;
+  transition:0.2s;
+}
 
-    .sidebar{
-      width:220px;
-      background:#ffffff;
-      border-right:1px solid #e5e5e5;
-      padding:20px 12px;
-    }
+#search:focus{
+  border-color:#007aff;
+  box-shadow:0 0 0 4px rgba(0,122,255,0.1);
+}
 
-    .sidebar h2{
-      font-size:18px;
-      margin:0 0 20px;
-    }
+/* GRID CONTAINER (NO MORE PHONE FEEL) */
+#grid{
+  max-width:1400px;             /* wider = desktop feel */
+  margin:30px auto;
+  padding:0 20px;
 
-    .nav-item{
-      padding:8px 10px;
-      border-radius:8px;
-      font-size:13px;
-      cursor:pointer;
-    }
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:22px;
+}
 
-    .nav-item:hover{
-      background:#f0f0f0;
-    }
+/* CARD */
+.card{
+  background:white;
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06),
+             0 6px 18px rgba(0,0,0,0.04);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  cursor:pointer;
+  transition:0.2s;
+}
 
-    /* MAIN */
-    .main{
-      flex:1;
-      padding:20px;
-    }
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 28px rgba(0,0,0,0.08);
+}
 
-    .search{
-      width:100%;
-      max-width:400px;
-      padding:10px 14px;
-      border-radius:10px;
-      border:1px solid #ddd;
-      margin-bottom:20px;
-      font-size:14px;
-    }
+/* ICON */
+.icon{
+  width:72px;
+  height:72px;
+  border-radius:18px;
+  object-fit:cover;
+  background:#eee;
+}
 
-    /* SECTION */
-    .section{
-      margin-bottom:30px;
-    }
+/* TEXT */
+.name{
+  font-size:15px;
+  font-weight:600;
+}
 
-    .section h3{
-      margin:0 0 12px;
-      font-size:18px;
-    }
+.desc{
+  font-size:13px;
+  color:#6e6e73;
+  line-height:1.4;
+  height:38px;
+  overflow:hidden;
+}
 
-    /* GRID */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-      gap:16px;
-    }
+/* BUTTON */
+.btn{
+  margin-top:auto;
+  padding:8px 14px;
+  border:none;
+  border-radius:999px;
+  background:#007aff;
+  color:white;
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer;
+  transition:0.15s;
+}
 
-    .card{
-      background:white;
-      border-radius:16px;
-      padding:14px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.05);
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      cursor:pointer;
-      transition:0.15s;
-    }
+.btn:hover{
+  background:#0060d1;
+}
 
-    .card:hover{
-      transform:translateY(-2px);
-    }
+/* RESPONSIVE (REAL FIX, NOT MOBILE MOCK) */
+@media (max-width:900px){
+  #grid{
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  }
 
-    .icon{
-      width:64px;
-      height:64px;
-      border-radius:16px;
-      background:#eee;
-    }
+  #search{
+    font-size:14px;
+    padding:14px 16px;
+  }
+}
 
-    .name{
-      font-size:14px;
-      font-weight:600;
-    }
-
-    .desc{
-      font-size:12px;
-      color:#6e6e73;
-      height:32px;
-      overflow:hidden;
-    }
-
-    .btn{
-      margin-top:auto;
-      padding:6px 10px;
-      border:none;
-      border-radius:999px;
-      background:#007aff;
-      color:white;
-      font-size:12px;
-      cursor:pointer;
-    }
-
-    .btn:hover{
-      background:#0060d1;
-    }
+@media (max-width:500px){
+  #grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+}
   </style>
 </head>
 
