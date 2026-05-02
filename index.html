@@ -6,87 +6,130 @@
   <title>App Store</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f5f5f7;
-      color: #111;
+body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:#f5f5f5;
+      color:#111;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      background: white;
-      padding: 12px;
-      border-bottom: 1px solid #eaeaea;
-      z-index: 10;
+    /* TOP BAR */
+    .topbar{
+      position:sticky;
+      top:0;
+      background:white;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 14px;
+      border-bottom:1px solid #e6e6e6;
+      z-index:10;
     }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      outline: none;
+    .logo{
+      font-weight:700;
+      color:#01875f;
+      font-size:18px;
+      white-space:nowrap;
     }
 
-    #grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-      padding: 16px;
-      max-width: 1100px;
-      margin: auto;
+    .search{
+      flex:1;
+      display:flex;
+      align-items:center;
+      background:#f1f3f4;
+      padding:8px 12px;
+      border-radius:999px;
     }
 
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease;
+    .search input{
+      border:none;
+      outline:none;
+      background:transparent;
+      width:100%;
+      font-size:14px;
     }
 
-    .card:hover {
-      transform: scale(1.02);
+    /* CATEGORY SCROLL */
+    .categories{
+      display:flex;
+      gap:10px;
+      overflow-x:auto;
+      padding:10px 14px;
+      background:white;
+      border-bottom:1px solid #eee;
     }
 
-    .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #eee;
+    .chip{
+      padding:6px 12px;
+      border-radius:999px;
+      background:#f1f3f4;
+      font-size:12px;
+      white-space:nowrap;
+      cursor:pointer;
     }
 
-    .name {
-      font-weight: 600;
-      font-size: 14px;
+    .chip.active{
+      background:#01875f;
+      color:white;
     }
 
-    .desc {
-      font-size: 12px;
-      color: #666;
-      min-height: 32px;
+    /* APP GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+      gap:12px;
+      padding:14px;
+      max-width:1100px;
+      margin:auto;
     }
 
-    .btn {
-      margin-top: auto;
-      padding: 8px;
-      border: none;
-      border-radius: 10px;
-      background: #111;
-      color: white;
-      font-size: 12px;
-      cursor: pointer;
+    .card{
+      background:white;
+      border-radius:14px;
+      padding:12px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+      cursor:pointer;
+      transition:0.15s;
     }
 
-    .btn:hover {
-      background: #333;
+    .card:hover{
+      transform:scale(1.02);
+    }
+
+    .icon{
+      width:56px;
+      height:56px;
+      border-radius:14px;
+      background:#eee;
+    }
+
+    .name{
+      font-size:13px;
+      font-weight:600;
+      margin-top:8px;
+    }
+
+    .meta{
+      font-size:11px;
+      color:#666;
+      margin-top:2px;
+    }
+
+    .btn{
+      margin-top:10px;
+      width:100%;
+      padding:8px;
+      border:none;
+      border-radius:8px;
+      background:#01875f;
+      color:white;
+      font-size:12px;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      background:#016b4b;
     }
   </style>
 </head>
