@@ -6,133 +6,131 @@
   <title>App Store</title>
 
   <style>
-    body{
+   body{
       margin:0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background:#f5f5f5;
+      font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+      background:#f5f5f7;
+      color:#1d1d1f;
       display:flex;
       justify-content:center;
     }
 
-    /* PHONE CONTAINER */
-    .phone{
+    /* APP CONTAINER */
+    .app{
       width:100%;
-      max-width:420px;
-      min-height:100vh;
-      background:#f5f5f5;
+      max-width:1100px;
     }
 
-    /* TOP BAR */
-    .topbar{
-      position:sticky;
-      top:0;
-      background:white;
+    /* SIDEBAR */
+    .layout{
       display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-bottom:1px solid #e6e6e6;
-      z-index:10;
+      min-height:100vh;
     }
 
-    .logo{
-      font-weight:700;
-      color:#01875f;
-      font-size:16px;
-      white-space:nowrap;
+    .sidebar{
+      width:220px;
+      background:#ffffff;
+      border-right:1px solid #e5e5e5;
+      padding:20px 12px;
+    }
+
+    .sidebar h2{
+      font-size:18px;
+      margin:0 0 20px;
+    }
+
+    .nav-item{
+      padding:8px 10px;
+      border-radius:8px;
+      font-size:13px;
+      cursor:pointer;
+    }
+
+    .nav-item:hover{
+      background:#f0f0f0;
+    }
+
+    /* MAIN */
+    .main{
+      flex:1;
+      padding:20px;
     }
 
     .search{
-      flex:1;
-      background:#f1f3f4;
-      border-radius:999px;
-      padding:8px 10px;
-      display:flex;
-      align-items:center;
-    }
-
-    .search input{
-      border:none;
-      outline:none;
-      background:transparent;
       width:100%;
-      font-size:13px;
+      max-width:400px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid #ddd;
+      margin-bottom:20px;
+      font-size:14px;
     }
 
-    /* CATEGORY ROW */
-    .categories{
-      display:flex;
-      gap:8px;
-      overflow-x:auto;
-      padding:10px;
+    /* SECTION */
+    .section{
+      margin-bottom:30px;
+    }
+
+    .section h3{
+      margin:0 0 12px;
+      font-size:18px;
+    }
+
+    /* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+      gap:16px;
+    }
+
+    .card{
       background:white;
-      border-bottom:1px solid #eee;
-    }
-
-    .chip{
-      font-size:11px;
-      padding:6px 10px;
-      border-radius:999px;
-      background:#f1f3f4;
-      white-space:nowrap;
-      cursor:pointer;
-    }
-
-    .chip.active{
-      background:#01875f;
-      color:white;
-    }
-
-    /* LIST ROWS (ICON + TINY NAME ONLY) */
-    .list{
+      border-radius:16px;
+      padding:14px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
       display:flex;
       flex-direction:column;
-    }
-
-    .row{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:10px 12px;
-      background:white;
-      border-bottom:1px solid #eee;
+      gap:10px;
       cursor:pointer;
+      transition:0.15s;
     }
 
-    .row:hover{
-      background:#fafafa;
+    .card:hover{
+      transform:translateY(-2px);
     }
 
     .icon{
-      width:40px;
-      height:40px;
-      border-radius:10px;
+      width:64px;
+      height:64px;
+      border-radius:16px;
       background:#eee;
-      flex-shrink:0;
     }
 
     .name{
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .desc{
       font-size:12px;
-      font-weight:500;
-      color:#111;
-      flex:1;
-      white-space:nowrap;
+      color:#6e6e73;
+      height:32px;
       overflow:hidden;
-      text-overflow:ellipsis;
     }
 
     .btn{
+      margin-top:auto;
       padding:6px 10px;
       border:none;
       border-radius:999px;
-      background:#01875f;
+      background:#007aff;
       color:white;
-      font-size:11px;
+      font-size:12px;
       cursor:pointer;
     }
 
     .btn:hover{
-      background:#016b4b;
+      background:#0060d1;
     }
   </style>
 </head>
