@@ -147,9 +147,35 @@ header{
 <script>
 let casks = [];
 
+  const featuredApps = [
+  "google-chrome",
+  "firefox",
+  "brave-browser",
+  "microsoft-edge",
+  "discord",
+  "slack",
+  "zoom",
+  "spotify",
+  "vlc",
+  "obs",
+  "visual-studio-code",
+  "figma",
+  "notion",
+  "telegram",
+  "whatsapp",
+  "steam",
+  "epic-games"
+];
+
 async function load() {
   const res = await fetch("https://formulae.brew.sh/api/cask.json");
   casks = await res.json();
+
+  casks = [
+    ...casks.filter(app => featuredApps.includes(app.token)),
+    ...casks.filter(app => !featuredApps.includes(app.token))
+  ];
+
   render(casks);
 }
 
