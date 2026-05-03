@@ -180,58 +180,12 @@ let casks = [];
 ];
 
 async function load() {
-  const [brewRes, wingetRes] = await Promise.all([
-    fetch("https://formulae.brew.sh/api/cask.json"),
-    fetch("https://api.github.com/repos/microsoft/winget-pkgs/git/trees/master?recursive=1")
-  ]);
+  const res = await fetch("https://formulae.brew.sh/api/cask.json");
+  casks = await res.json();
 
-  const brewRaw = await brewRes.json();
-  const wingetRaw = await wingetRes.json();
-
-  // 🍎 Homebrew apps
-  const brewApps = brewRaw.map(app => ({
-    name: app.name?.[0] || app.token,
-    token: app.token,
-    desc: app.desc || "",
-    homepage: app.homepage || app.url,
-    url: app.url,
-    platform: "macOS"
-  }));
-
-  // 🪟 Winget apps (basic extraction)
-  const wingetApps = wingetRaw.tree
-    .filter(f => f.path.startsWith("manifests/") && f.path.endsWith(".yaml"))
-    .map(f => {
-      const parts = f.path.split("/");
-      const token = parts[2] || "unknown";
-
-      return {
-        name: token,
-        token: token,
-        desc: "",
-        homepage: "",
-        url: "",
-        platform: "Windows"
-      };
-    });
-
-  // 🔥 merge + remove duplicates
-  const seen = new Set();
-
-  casks = [...brewApps, ...wingetApps].filter(app => {
-    const key = `${app.token}-${app.platform}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-
-  render(casks);
-}
-
-  // merge both stores
   casks = [
-    ...brewApps,
-    ...wingetApps
+    ...casks.filter(app => featuredApps.includes(app.token)),
+    ...casks.filter(app => !featuredApps.includes(app.token))
   ];
 
   render(casks);
@@ -277,8 +231,7 @@ function render(data) {
   grid.innerHTML = "";
 
   data.slice(0, 200).forEach(app => {
-    const baseName = app.name || app.token;
-const name = `${baseName} (${app.platform})`;
+    const name = app.name?.[0] || app.token;
 
     const card = document.createElement("div");
     card.className = "card";
