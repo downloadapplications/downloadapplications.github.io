@@ -6,47 +6,71 @@
   <title>App Store</title>
 
   <style>
-  /* BASE */
+/* BASE - AERO 2009 */
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  background:#f5f5f7;
-  color:#1d1d1f;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: radial-gradient(circle at top, #e6f2ff 0%, #b9d7ff 40%, #7fb2ff 100%);
+  color:#1a1a1a;
 }
 
-/* HEADER (FIXES YOUR TINY SEARCH) */
+/* HEADER (GLASS BAR) */
 header{
   position:sticky;
   top:0;
   z-index:10;
-  background:rgba(245,245,247,0.85);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid #e5e5e5;
+
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.6) inset,
+    0 8px 30px rgba(0,0,0,0.15);
+
   display:flex;
   justify-content:center;
-  padding:16px 20px;
+  padding:18px 20px;
 }
 
+/* SEARCH (GLOSSY AERO FIELD) */
 #search{
   width:100%;
-  max-width:900px;              /* BIG desktop search */
+  max-width:900px;
+
   padding:16px 20px;
   font-size:16px;
-  border-radius:14px;
-  border:1px solid #ddd;
-  background:#fff;
+
+  border-radius:16px;
+
+  border:1px solid rgba(255,255,255,0.6);
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.9),
+    rgba(200,220,255,0.6)
+  );
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.8) inset,
+    0 6px 18px rgba(0,0,0,0.15);
+
   outline:none;
   transition:0.2s;
 }
 
 #search:focus{
-  border-color:#007aff;
-  box-shadow:0 0 0 4px rgba(0,122,255,0.1);
+  border-color:#4aa3ff;
+  box-shadow:
+    0 0 0 4px rgba(0,120,255,0.25),
+    0 2px 0 rgba(255,255,255,0.9) inset,
+    0 10px 25px rgba(0,80,255,0.25);
 }
 
-/* GRID CONTAINER (NO MORE PHONE FEEL) */
+/* GRID */
 #grid{
-  max-width:1400px;             /* wider = desktop feel */
+  max-width:1400px;
   margin:30px auto;
   padding:0 20px;
 
@@ -55,67 +79,111 @@ header{
   gap:22px;
 }
 
-/* CARD */
+/* CARD (AERO GLASS TILE) */
 .card{
-  background:white;
-  border-radius:18px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border:1px solid rgba(255,255,255,0.5);
+
+  border-radius:20px;
+
   padding:16px;
-  box-shadow:0 1px 4px rgba(0,0,0,0.06),
-             0 6px 18px rgba(0,0,0,0.04);
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.8) inset,
+    0 10px 30px rgba(0,0,0,0.18);
+
   display:flex;
   flex-direction:column;
   gap:12px;
+
   cursor:pointer;
   transition:0.2s;
 }
 
 .card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 28px rgba(0,0,0,0.08);
+  transform:translateY(-6px) scale(1.02);
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.9) inset,
+    0 18px 40px rgba(0,80,255,0.25);
 }
 
-/* ICON */
+/* ICON (GLOSS TILE) */
 .icon{
   width:72px;
   height:72px;
-  border-radius:18px;
+  border-radius:16px;
+
   object-fit:cover;
-  background:#eee;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.9),
+    rgba(180,210,255,0.5)
+  );
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.9) inset,
+    0 8px 18px rgba(0,0,0,0.15);
 }
 
 /* TEXT */
 .name{
   font-size:15px;
   font-weight:600;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
 .desc{
   font-size:13px;
-  color:#6e6e73;
+  color:#2f3b55;
   line-height:1.4;
   height:38px;
   overflow:hidden;
 }
 
-/* BUTTON */
+/* BUTTON (AERO BLUE GLOSS) */
 .btn{
   margin-top:auto;
-  padding:8px 14px;
+
+  padding:9px 14px;
   border:none;
   border-radius:999px;
-  background:#007aff;
+
+  background: linear-gradient(
+    to bottom,
+    #5bb3ff,
+    #1e7cff
+  );
+
   color:white;
   font-size:13px;
-  font-weight:500;
+  font-weight:600;
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.4) inset,
+    0 8px 18px rgba(0,80,255,0.3);
+
   cursor:pointer;
   transition:0.15s;
 }
 
 .btn:hover{
-  background:#0060d1;
+  background: linear-gradient(
+    to bottom,
+    #74c2ff,
+    #2b86ff
+  );
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.5) inset,
+    0 12px 25px rgba(0,100,255,0.35);
 }
 
-/* RESPONSIVE (REAL FIX, NOT MOBILE MOCK) */
+/* RESPONSIVE */
 @media (max-width:900px){
   #grid{
     grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
