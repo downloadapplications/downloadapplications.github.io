@@ -188,7 +188,7 @@ async function load() {
   const brewRaw = await brewRes.json();
   const wingetRaw = await wingetRes.json();
 
-  // 🍎 Homebrew apps (UNCHANGED but tagged)
+  // 🍎 Homebrew apps
   const brewApps = brewRaw.map(app => ({
     name: app.name?.[0] || app.token,
     token: app.token,
@@ -198,22 +198,35 @@ async function load() {
     platform: "macOS"
   }));
 
-  // 🪟 Winget apps (basic full listing, no install logic)
+  // 🪟 Winget apps (basic extraction)
   const wingetApps = wingetRaw.tree
     .filter(f => f.path.startsWith("manifests/") && f.path.endsWith(".yaml"))
     .map(f => {
       const parts = f.path.split("/");
-      const token = parts[2];
+      const token = parts[2] || "unknown";
 
       return {
         name: token,
-        token,
+        token: token,
         desc: "",
         homepage: "",
         url: "",
         platform: "Windows"
       };
     });
+
+  // 🔥 merge + remove duplicates
+  const seen = new Set();
+
+  casks = [...brewApps, ...wingetApps].filter(app => {
+    const key = `${app.token}-${app.platform}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  render(casks);
+}
 
   // merge both stores
   casks = [
@@ -264,7 +277,7 @@ function render(data) {
   grid.innerHTML = "";
 
   data.slice(0, 200).forEach(app => {
-    const baseName = app.name?.[0] || app.token;
+    const baseName = app.name || app.token;
 const name = `${baseName} (${app.platform})`;
 
     const card = document.createElement("div");
