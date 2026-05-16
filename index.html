@@ -4,459 +4,539 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>App Store</title>
-
   <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --text: #1d1d1f;
+      --text2: #6e6e73;
+      --text3: #aeaeb2;
+      --blue: #0071e3;
+      --blue-light: #e8f0fe;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
 
-.store-wrap {
-  font-family: var(--font-sans);
-  background: var(--color-background-tertiary);
-  min-height: 600px;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-.store-header {
-  padding: 20px 20px 0;
-  background: var(--color-background-primary);
-  border-bottom: 0.5px solid var(--color-border-tertiary);
-}
+    body {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
 
-.store-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
+    .layout { display: flex; min-height: 100vh; }
 
-.store-logo {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-}
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 10px;
+      overflow-y: auto;
+    }
 
-.store-logo span {
-  color: var(--color-text-info);
-}
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      color: var(--text3);
+      text-transform: uppercase;
+      padding: 10px 12px 4px;
+    }
 
-.search-wrap {
-  flex: 1;
-  position: relative;
-}
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      cursor: pointer;
+      transition: background 0.1s, color 0.1s;
+      user-select: none;
+    }
 
-.search-wrap i {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 15px;
-  color: var(--color-text-tertiary);
-}
+    .nav-item:hover { background: rgba(0,0,0,0.05); color: var(--text); }
+    .nav-item.active { background: var(--blue); color: #fff; }
 
-#search {
-  width: 100%;
-  padding: 8px 12px 8px 32px;
-  font-size: 14px;
-  border-radius: var(--border-radius-md);
-  border: 0.5px solid var(--color-border-secondary);
-  background: var(--color-background-secondary);
-  color: var(--color-text-primary);
-  outline: none;
-}
+    .nav-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      background: rgba(0,0,0,0.05);
+    }
 
-#search:focus {
-  border-color: var(--color-border-info);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
-}
+    .nav-item.active .nav-icon { background: rgba(255,255,255,0.2); }
 
-.tabs {
-  display: flex;
-  gap: 0;
-  border-bottom: 0.5px solid var(--color-border-tertiary);
-}
+    /* ── MAIN ── */
+    .main { flex: 1; min-width: 0; }
 
-.tab {
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245,245,247,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      padding: 11px 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-.tab.active {
-  color: var(--color-text-info);
-  border-color: #3b82f6;
-}
+    .topbar-logo {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.4px;
+      flex-shrink: 0;
+    }
 
-.tab:hover:not(.active) {
-  color: var(--color-text-primary);
-}
+    .topbar-logo span { color: var(--blue); }
 
-.featured {
-  padding: 16px 16px 0;
-}
+    .search-wrap { flex: 1; max-width: 440px; position: relative; }
 
-.featured-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
+    .search-wrap svg {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text3);
+      pointer-events: none;
+    }
 
-.hero {
-  background: linear-gradient(135deg, #1e3a5f, #0f6e56);
-  border-radius: var(--border-radius-lg);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-  margin-bottom: 4px;
-}
+    #search {
+      width: 100%;
+      padding: 9px 14px 9px 34px;
+      font-size: 14px;
+      font-family: inherit;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.8);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
 
-.hero:hover {
-  opacity: 0.92;
-}
+    #search::placeholder { color: var(--text3); }
 
-.hero-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  flex-shrink: 0;
-}
+    #search:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,113,227,0.15);
+      background: #fff;
+    }
 
-.hero-text .hero-name {
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-}
+    .app-count {
+      font-size: 12px;
+      color: var(--text3);
+      margin-left: auto;
+      white-space: nowrap;
+    }
 
-.hero-text .hero-sub {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.65);
-  margin-top: 2px;
-}
+    /* ── CONTENT ── */
+    .content { padding: 28px; }
 
-.hero-badge {
-  margin-left: auto;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 500;
-  padding: 5px 12px;
-  border-radius: 999px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background 0.15s;
-}
+    /* ── HERO ── */
+    .hero {
+      border-radius: var(--radius-xl);
+      padding: 36px 40px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
+      transition: opacity 0.15s;
+    }
 
-.hero-badge:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 75% 50%, rgba(0,113,227,0.4) 0%, transparent 60%);
+      pointer-events: none;
+    }
 
-.section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 16px 16px 8px;
-}
+    .hero:hover { opacity: 0.93; }
 
-.section-title {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-}
+    .hero-left { position: relative; z-index: 1; }
 
-.see-all {
-  font-size: 13px;
-  color: var(--color-text-info);
-  cursor: pointer;
-}
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 6px;
+    }
 
-#grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1px;
-  background: var(--color-border-tertiary);
-  border-top: 0.5px solid var(--color-border-tertiary);
-}
+    .hero-name {
+      font-size: 30px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
 
-.card {
-  background: var(--color-background-primary);
-  padding: 14px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  transition: background 0.12s;
-}
+    .hero-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 8px;
+      max-width: 300px;
+      line-height: 1.4;
+    }
 
-.card:hover {
-  background: var(--color-background-secondary);
-}
+    .hero-get {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 7px 20px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
 
-.icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  flex-shrink: 0;
-  border: 0.5px solid var(--color-border-tertiary);
-}
+    .hero-get:hover { background: rgba(255,255,255,0.25); }
 
-.card-info {
-  flex: 1;
-  min-width: 0;
-}
+    .hero-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 20px;
+      object-fit: cover;
+      margin-left: auto;
+      flex-shrink: 0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      background: #333;
+      position: relative;
+      z-index: 1;
+    }
 
-.name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    /* ── SECTION ── */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
 
-.desc {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  margin-top: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
 
-.stars {
-  font-size: 10px;
-  color: var(--color-text-tertiary);
-  margin-top: 3px;
-}
+    .see-all { font-size: 13px; font-weight: 500; color: var(--blue); cursor: pointer; }
 
-.get-btn {
-  padding: 5px 13px;
-  font-size: 12px;
-  font-weight: 500;
-  border: none;
-  border-radius: 999px;
-  background: var(--color-background-info);
-  color: var(--color-text-info);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: opacity 0.15s;
-}
+    /* ── GRID ── */
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      gap: 1px;
+      background: var(--border);
+    }
 
-.get-btn:hover {
-  opacity: 0.8;
-}
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
 
-.no-results {
-  padding: 40px;
-  text-align: center;
-  color: var(--color-text-secondary);
-  font-size: 14px;
-  grid-column: 1 / -1;
-}
+    .card:hover { background: #fafafa; }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 13px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #ebebeb;
+      border: 1px solid var(--border);
+    }
+
+    .card-body { flex: 1; min-width: 0; }
+
+    .card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-cat {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.03em;
+      margin-top: 1px;
+      text-transform: uppercase;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn {
+      flex-shrink: 0;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 999px;
+      background: var(--blue-light);
+      color: var(--blue);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn:hover { background: #d2e3fc; }
+
+    /* ── STATES ── */
+    .state-msg {
+      grid-column: 1/-1;
+      padding: 80px 20px;
+      text-align: center;
+      color: var(--text2);
+    }
+
+    .state-msg .emoji { font-size: 42px; display: block; margin-bottom: 12px; }
+    .state-msg p { font-size: 16px; font-weight: 500; }
+    .state-msg small { font-size: 13px; color: var(--text3); }
+
+    /* skeleton shimmer */
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skel {
+      background: linear-gradient(90deg,#e8e8e8 25%,#f4f4f4 50%,#e8e8e8 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 5px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 740px) {
+      .sidebar { display: none; }
+      .topbar { padding: 10px 14px; }
+      .content { padding: 14px; }
+      .hero { padding: 22px; }
+      .hero-name { font-size: 22px; }
+      #grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
-
 <body>
 
-<header>
-  <input id="search" placeholder="Search apps and games..." />
-</header>
+<div class="layout">
 
-<div id="grid"></div>
+  <aside class="sidebar">
+    <div class="sidebar-title">Discover</div>
+    <div class="nav-item active" onclick="setcat('all',this)"><span class="nav-icon">🏠</span>All Apps</div>
+    <div class="nav-item" onclick="setcat('featured',this)"><span class="nav-icon">⭐</span>Featured</div>
+
+    <div class="sidebar-title">Categories</div>
+    <div class="nav-item" onclick="setcat('browsers',this)"><span class="nav-icon">🌐</span>Browsers</div>
+    <div class="nav-item" onclick="setcat('productivity',this)"><span class="nav-icon">📋</span>Productivity</div>
+    <div class="nav-item" onclick="setcat('creative',this)"><span class="nav-icon">🎨</span>Creative</div>
+    <div class="nav-item" onclick="setcat('developer',this)"><span class="nav-icon">⌨️</span>Developer</div>
+    <div class="nav-item" onclick="setcat('social',this)"><span class="nav-icon">💬</span>Social</div>
+    <div class="nav-item" onclick="setcat('gaming',this)"><span class="nav-icon">🎮</span>Gaming</div>
+    <div class="nav-item" onclick="setcat('security',this)"><span class="nav-icon">🔐</span>Security & VPN</div>
+    <div class="nav-item" onclick="setcat('utilities',this)"><span class="nav-icon">🔧</span>Utilities</div>
+    <div class="nav-item" onclick="setcat('media',this)"><span class="nav-icon">🎵</span>Media</div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <span class="topbar-logo">App<span>Store</span></span>
+      <div class="search-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="search" type="search" placeholder="Search apps…" oninput="onsearch(this.value)" />
+      </div>
+      <span class="app-count" id="app-count"></span>
+    </div>
+
+    <div class="content">
+      <div class="hero" id="hero" onclick="window.open('https://code.visualstudio.com','_blank')">
+        <div class="hero-left">
+          <div class="hero-eyebrow">Editor's Choice</div>
+          <div class="hero-name">Visual Studio<br>Code</div>
+          <div class="hero-desc">The world's most popular code editor, built for Mac.</div>
+          <button class="hero-get" onclick="event.stopPropagation();window.open('https://code.visualstudio.com','_blank')">Get &rarr;</button>
+        </div>
+        <img class="hero-img" src="https://www.google.com/s2/favicons?domain=code.visualstudio.com&sz=128" alt="VS Code" onerror="this.style.display='none'" />
+      </div>
+
+      <div class="section-head">
+        <span class="section-title" id="section-label">All Apps</span>
+        <span class="see-all" id="count-label"></span>
+      </div>
+
+      <div id="grid"></div>
+    </div>
+  </div>
+</div>
 
 <script>
-let casks = [];
+let allCasks = [];
+let activeCat = 'all';
+let query = '';
 
-  const featuredApps = [
-  "google-chrome",
-  "firefox",
-  "brave-browser",
-  "microsoft-edge",
-  "discord",
-  "slack",
-  "zoom",
-  "spotify",
-  "vlc",
-  "obs",
-  "visual-studio-code",
-  "figma",
-  "notion",
-  "telegram",
-  "whatsapp",
-  "steam",
-  "epic-games",
-  "gimp",
-  "krita",
-  "audacity",
-  "raycast",
-  "libreoffice",
-  "onlyoffice",
-  "microsoft-teams",
-  "microsoft-word",
-  "microsoft-powerpoint",
-  "microsoft-excel",
-  "onedrive",
-  "thunderbird",
-  "adobe-creative-cloud",
-  "adobe-acrobat-reader",
-  "adobe-dng-converter",
-  "opera",
-  "arc",
-  "alfred",
-  "evernote",
-  "obsidian",
-  "rectangle",
-  "alt-tab",
-  "inkscape",
-  "blender",
-  "affinity",
-  "malwarebytes",
-  "cleanmymac",
-  "slack",
-  "signal",
-  "calibre",
-  "appcleaner",
-  "onyx",
-  "latest",
-  "freecad",
-  "scribus",
-  "kodi",
-  "github",
-  "android-studio",
-  "visual-studio-code",
-  "utm",
-  "parallels",
-  "virtualbox",
-  "minecraft",
-  "prismlauncher",
-  "gog-galaxy",
-  "modrinth",
-  "league-of-legends",
-  "protonvpn",
-  "nordvpn",
-  "bitwarden",
-  "1password",
-  "keepassxc",
-  "lastpass",
-  "nordpass",
-  "tor-browser",
-  "transmission"
-  
-  
-  
-];
+const featured = ["google-chrome","firefox","brave-browser","microsoft-edge","discord","slack","zoom","spotify","vlc","obs","visual-studio-code","figma","notion","telegram","whatsapp","steam","epic-games","gimp","krita","audacity","raycast","libreoffice","onlyoffice","microsoft-teams","microsoft-word","microsoft-powerpoint","microsoft-excel","onedrive","thunderbird","adobe-creative-cloud","adobe-acrobat-reader","opera","arc","alfred","evernote","obsidian","rectangle","alt-tab","inkscape","blender","malwarebytes","cleanmymac","signal","calibre","appcleaner","onyx","kodi","github","android-studio","utm","parallels","virtualbox","minecraft","prismlauncher","gog-galaxy","modrinth","league-of-legends","protonvpn","nordvpn","bitwarden","1password","keepassxc","lastpass","tor-browser","transmission"];
+
+const cats = {
+  browsers:["google-chrome","firefox","brave-browser","microsoft-edge","opera","arc","tor-browser"],
+  productivity:["notion","slack","zoom","microsoft-teams","microsoft-word","microsoft-powerpoint","microsoft-excel","onedrive","thunderbird","evernote","obsidian","libreoffice","onlyoffice","raycast","rectangle","alfred"],
+  creative:["figma","gimp","krita","inkscape","blender","adobe-creative-cloud","adobe-acrobat-reader","audacity"],
+  developer:["visual-studio-code","github","android-studio","utm","parallels","virtualbox"],
+  social:["discord","telegram","whatsapp","slack","signal","zoom"],
+  gaming:["steam","epic-games","minecraft","prismlauncher","gog-galaxy","modrinth","league-of-legends"],
+  security:["bitwarden","1password","keepassxc","lastpass","nordvpn","protonvpn","tor-browser","malwarebytes"],
+  utilities:["rectangle","alt-tab","appcleaner","onyx","cleanmymac","raycast","alfred","transmission","calibre"],
+  media:["spotify","vlc","obs","kodi","audacity"]
+};
+
+const catNames = {all:'All Apps',featured:'Featured',browsers:'Browsers',productivity:'Productivity',creative:'Creative',developer:'Developer Tools',social:'Social',gaming:'Gaming',security:'Security & VPN',utilities:'Utilities',media:'Media'};
+
+function icon(app) {
+  const gh = app.homepage?.match(/github\.com\/([^\/]+)\//);
+  if (gh) return `https://github.com/${gh[1]}.png?size=128`;
+  if (app.homepage) { try { return `https://www.google.com/s2/favicons?domain=${new URL(app.homepage).origin}&sz=128`; } catch(e){} }
+  return '';
+}
+
+function link(app) { return app.homepage || `https://formulae.brew.sh/cask/${app.token}`; }
+
+function catOf(token) {
+  for (const [c,arr] of Object.entries(cats)) if (arr.includes(token)) return catNames[c];
+  return 'App';
+}
+
+function filtered() {
+  let l = allCasks;
+  if (activeCat === 'featured') l = l.filter(a => featured.includes(a.token));
+  else if (cats[activeCat]) l = l.filter(a => cats[activeCat].includes(a.token));
+  if (query) { const q = query.toLowerCase(); l = l.filter(a => (a.name?.[0]||'').toLowerCase().includes(q) || a.token.includes(q) || (a.desc||'').toLowerCase().includes(q)); }
+  return l.slice(0,200);
+}
+
+function render() {
+  const grid = document.getElementById('grid');
+  const list = filtered();
+  document.getElementById('section-label').textContent = catNames[activeCat]||'Apps';
+  document.getElementById('count-label').textContent = list.length ? list.length+' apps' : '';
+  document.getElementById('app-count').textContent = list.length ? list.length+' apps' : '';
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="state-msg"><span class="emoji">🔍</span><p>No results for "${query}"</p><small>Try a different search term</small></div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(app => {
+    const n = (app.name?.[0]||app.token).replace(/</g,'&lt;');
+    const d = (app.desc||'').replace(/</g,'&lt;');
+    const ic = icon(app);
+    const lk = link(app).replace(/"/g,'%22');
+    return `<div class="card" onclick="window.open('${lk}','_blank')">
+      <img class="icon" src="${ic||'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='}" alt="${n}" onerror="this.style.background='#e0e0e0';this.removeAttribute('src')" />
+      <div class="card-body">
+        <div class="card-name">${n}</div>
+        <div class="card-cat">${catOf(app.token)}</div>
+        <div class="card-desc">${d||'No description'}</div>
+      </div>
+      <button class="btn" onclick="event.stopPropagation();window.open('${lk}','_blank')">Get</button>
+    </div>`;
+  }).join('');
+}
+
+function skeleton() {
+  document.getElementById('grid').innerHTML = Array(12).fill(`
+    <div class="card">
+      <div class="icon skel" style="border:none"></div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:6px">
+        <div class="skel" style="height:14px;width:65%;border-radius:4px"></div>
+        <div class="skel" style="height:10px;width:35%;border-radius:4px"></div>
+        <div class="skel" style="height:10px;width:85%;border-radius:4px"></div>
+      </div>
+      <div class="skel" style="width:54px;height:28px;border-radius:999px;flex-shrink:0"></div>
+    </div>`).join('');
+}
+
+function setcat(cat, el) {
+  activeCat = cat;
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  const hero = document.getElementById('hero');
+  hero.style.display = (cat==='all'||cat==='featured') && !query ? 'flex' : 'none';
+  render();
+}
+
+function onsearch(q) {
+  query = q;
+  const hero = document.getElementById('hero');
+  hero.style.display = q ? 'none' : (activeCat==='all'||activeCat==='featured') ? 'flex' : 'none';
+  render();
+}
 
 async function load() {
-  const res = await fetch("https://formulae.brew.sh/api/cask.json");
-  casks = await res.json();
-
-  casks = [
-    ...casks.filter(app => featuredApps.includes(app.token)),
-    ...casks.filter(app => !featuredApps.includes(app.token))
-  ];
-
-  render(casks);
-}
-
-function getIcon(app) {
-  // 1. Try GitHub avatar (best if homepage is GitHub)
-  const gh = app.homepage?.match(/github\.com\/([^\/]+)\/([^\/]+)/);
-  if (gh) {
-    return `https://github.com/${gh[1]}.png?size=128`;
+  skeleton();
+  try {
+    const res = await fetch('https://formulae.brew.sh/api/cask.json');
+    allCasks = await res.json();
+    allCasks = [...allCasks.filter(a=>featured.includes(a.token)),...allCasks.filter(a=>!featured.includes(a.token))];
+    render();
+  } catch(e) {
+    document.getElementById('grid').innerHTML = '<div class="state-msg"><span class="emoji">⚠️</span><p>Could not load apps</p><small>Check your internet connection and reload</small></div>';
   }
-
-  // 2. Try website favicon (best general fallback)
-  if (app.homepage) {
-    try {
-      const domain = new URL(app.homepage).origin;
-      return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-    } catch (e) {}
-  }
-
-  // 3. Final fallback (no Dicebear anymore)
-  return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
 }
-
-function getAppLink(app) {
-  if (app.url) return app.url;
-  if (app.homepage) return app.homepage;
-
-  const gh = app.homepage?.match(/github\.com\/([^\/]+\/[^\/]+)/);
-  if (gh) return `https://github.com/${gh[1]}`;
-
-  return `https://formulae.brew.sh/cask/${app.token}`;
-}
-
-function openApp(token) {
-  const app = casks.find(a => a.token === token);
-  const url = getAppLink(app);
-  window.open(url, "_blank");
-}
-
-function render(data) {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-
-  data.slice(0, 200).forEach(app => {
-    const name = app.name?.[0] || app.token;
-
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <img class="icon"
-           src="${getIcon(app)}"
-           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'"
-
-      <div class="name">${name}</div>
-      <div class="desc">${app.desc || "No description"}</div>
-
-      <button class="btn" onclick="event.stopPropagation(); openApp('${app.token}')">
-        Download App
-      </button>
-    `;
-
-    card.onclick = () => openApp(app.token);
-
-    grid.appendChild(card);
-  });
-}
-
-document.getElementById("search").addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
-
-  const filtered = casks.filter(app =>
-    (app.name?.[0] || "").toLowerCase().includes(q) ||
-    app.token.toLowerCase().includes(q) ||
-    (app.desc || "").toLowerCase().includes(q)
-  );
-
-  render(filtered);
-});
 
 load();
 </script>
-
 </body>
 </html>
