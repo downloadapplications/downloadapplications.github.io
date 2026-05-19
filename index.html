@@ -24,7 +24,7 @@
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       width: 90%;
-      max-width: 500px;
+      max-width: 520px;
     }
 
     h1 {
@@ -32,9 +32,16 @@
       font-size: 28px;
     }
 
-    p {
-      margin-bottom: 25px;
+    .subtitle {
       color: #cbd5e1;
+      margin-bottom: 15px;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 25px;
+      line-height: 1.5;
     }
 
     .btn {
@@ -44,7 +51,6 @@
       margin: 10px 0;
       font-size: 18px;
       font-weight: bold;
-      border: none;
       border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
@@ -67,18 +73,33 @@
     .windows:hover {
       background: #16a34a;
     }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #64748b;
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
     <h1>Welcome to DownloadApplications</h1>
+    <div class="subtitle">A simple hub for downloading official applications</div>
+
+    <div class="desc">
+      Choose your platform to continue. You’ll be taken to a curated list of apps
+      built specifically for your operating system, using official download sources.
+    </div>
+
     <p>What platform are you on?</p>
 
     <a class="btn mac" href="https://downloadapplications.github.io/macos-apps">macOS</a>
     <a class="btn windows" href="https://downloadapplications.github.io/windows-apps">Windows</a>
+
+    <div class="footer">
+      DownloadApplications • Open app directory
+    </div>
   </div>
 </body>
 </html>
-
-
